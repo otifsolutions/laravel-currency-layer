@@ -17,7 +17,7 @@ __Using Composer (Recommended)__
 
 
 ```
-composer require otifsolutions/currencyLayer
+composer require otifsolutions/currency-layer
 ```
 
 __if database table are not populated with data, run this command__
@@ -26,14 +26,12 @@ __if database table are not populated with data, run this command__
 php artisan db:seed
 ```
 
-
-
 __Then Run the migrations__
 
 Grab the access_key by registering on `https://currencylayer.com`, and anywhere in the code write this line and enter your access key
 
 ```
-OTIFSolutions\Laravel\Settings\Models\Setting::set('CURRENCY_LAYER_API_ACCESS_KEY', 'Your key goes here');
+OTIFSolutions\Laravel\Settings\Models\Setting::set('currency_layer_access_key', 'Your key goes here');
 ```
 
 We won't be storing data in bulk of thousands of records (exchange rates). Set the number of days where data of how many days you want to keep  
