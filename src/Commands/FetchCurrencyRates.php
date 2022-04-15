@@ -15,34 +15,37 @@ class FetchCurrencyRates extends Command {
 
     public function handle() {
 
+        // user will set the access accessKey and we will use this access accessKey
+        // Setting::set('CURRENCY_LAYER_API_ACCESS_KEY', 'e568ea241bcd6eb1bc61bc9894943f19');
 
         $accessKey = Setting::get('CURRENCY_LAYER_API_ACCESS_KEY');
+
+        if (!isset($accessKey)) {
+            $this->warn('CurrencyLayer API Access key is not set');
+            return;
+        }
+
+        if (!(strlen($accessKey) === 32)) {
+            $this->warn('Access key length is not valid');
+            return;
+        }
 
         if (Currency::all()->count() === 0) {
             $this->warn('Currency table is blank | Please run the seed first');
             return;
         }
 
-        if (!isset($accessKey)) {
-            $this->warn('CURRENCY_LAYER_API_ACCESS_KEY is not set');
+        $response = Curl::Make()
+            ->GET
+            ->url('http://api.currencylayer.com/live')
+            ->params([
+                'access_key' => $accessKey
+            ])
+            ->execute();
+
+        if (!isset($response['quotes'])) {
+            $this->warn('Please check if monthly API hit limit reached');
             return;
-        }
-
-        try {
-            $response = Curl::Make()
-                ->GET
-                ->url('http://api.currencylayer.com/live')
-                ->params([
-                    'access_key' => $accessKey
-                ])
-                ->execute();
-
-        } catch (Exception $exception) {
-            return response()->json([
-                'message' => 'Cannot fetch Exchange rates | Check monthly API endpoint hit limit',
-                'exceptionCode' => (int)$exception->getCode(),
-                'description' => $exception->getMessage()
-            ], 400);
         }
 
         $timesCounter = CurrencyRate::all()->count();

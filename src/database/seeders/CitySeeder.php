@@ -14,12 +14,12 @@ class CitySeeder extends Seeder {
     public function run() {
 
         set_time_limit(30);
-        $filename = __DIR__ . '/cities.csv';
-        $rows = $this->_csv_row_count($filename);
-        $items_per_run = 50000;
-        for ($i = 0; $i <= $rows; $i += $items_per_run + 1) {
+        $filename = __DIR__ . './../csvFiles/cities.csv';
+        $rows = $this->csvRowsCount($filename);
+        $itemsPerRun = 50000;
+        for ($i = 0; $i <= $rows; $i += $itemsPerRun + 1) {
             $cities = array();
-            $chunk = $this->_csv_slice($filename, $i, $items_per_run);
+            $chunk = $this->sliceCsv($filename, $i, $itemsPerRun);
             foreach ($chunk as $item) {
                 $cities[] = [
                     'name' => $item->name,
@@ -29,13 +29,13 @@ class CitySeeder extends Seeder {
                     'country_name' => $item->country_name,
                     'latitude' => $item->latitude,
                     'longitude' => $item->longitude,
-                    'wikiDataId' => $item->wikiDataId
+                    'wiki_data_id' => $item->wikiDataId
                 ];
-
             }
+
             foreach (array_chunk($cities, 5000) as $part) {
                 City::upsert(
-                    $part, ['wikiDataId']
+                    $part, ['wiki_data_id']
                 );
             }
 
@@ -43,17 +43,18 @@ class CitySeeder extends Seeder {
 
     }
 
-    private function _csv_slice($filename, $start, $desired_count) {
+    private function sliceCsv($filename, $start, $desiredCount) {
         $row = 0;
         $count = 0;
         $rows = array();
-        if (($handle = fopen($filename, "r")) === FALSE) {
+        if (($handle = fopen($filename, 'rb')) === FALSE) {
             return FALSE;
         }
-        while (($row_data = fgetcsv($handle, 2000, ",")) !== FALSE) {
+
+        while (($singleRowData = fgetcsv($handle, 2000, ",")) !== FALSE) {
             // Grab headings.
-            if ($row == 0) {
-                $headings = $row_data;
+            if ($row === 0) {
+                $headings = $singleRowData;
                 $row++;
                 continue;
             }
@@ -63,26 +64,26 @@ class CitySeeder extends Seeder {
                 continue;
             }
 
-            $rows[] = (object)array_combine($headings, $row_data);
+            $rows[] = (object)array_combine($headings, $singleRowData);
             $count++;
-            if ($count == $desired_count) {
+            if ($count === $desiredCount) {
                 return $rows;
             }
         }
         return $rows;
     }
 
-    private function _csv_row_count($filename) {
+    private function csvRowsCount($filename) {
         ini_set('auto_detect_line_endings', TRUE);
-        $row_count = 0;
-        if (($handle = fopen($filename, "r")) !== FALSE) {
-            while (($row_data = fgetcsv($handle, 2000, ",")) !== FALSE) {
-                $row_count++;
+        $rowsCounter = 0;
+        if (($handle = fopen($filename, 'rb')) !== FALSE) {
+            while (($rowData = fgetcsv($handle, 2000, ",")) !== FALSE) {
+                $rowsCounter++;
             }
             fclose($handle);
             // Exclude the headings.
-            $row_count--;
-            return $row_count;
+            $rowsCounter--;
+            return $rowsCounter;
         }
     }
 

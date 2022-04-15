@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('country_name'); // like "afghanistah"
             $table->float('latitude');     // like "36.68333000"
             $table->float('longitude');    // like "71.53333000"
-            $table->string('wikiDataId');   // like "Q4805192"
+            $table->string('wiki_data_id');   // like "Q4805192"
 
             $table->integer('state_id')
                 ->unsigned()

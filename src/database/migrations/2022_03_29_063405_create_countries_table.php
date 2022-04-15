@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->string('subregion');        // "Southern Asia"
             $table->float('latitude');         // int or string
             $table->float('longitude');        // int or float
-            $table->string('flag')->nullable();     // generate this data from another json file sir provided
+            $table->string('flag')->nullable();
             $table->timestamps();
         });
     }

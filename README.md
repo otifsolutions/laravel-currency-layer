@@ -17,7 +17,7 @@ __Using Composer (Recommended)__
 
 
 ```
-composer require otifsolutions/currencyLayer
+composer require otifsolutions/laravel-currency-layer 
 ```
 
 __And then run the migrations__
@@ -32,11 +32,12 @@ __if database tables are not yet populated with data, run this command__
 php artisan db:seed
 ```
 
+__Then Run the migrations__
 
 Grab the access_key by registering on `https://currencylayer.com`, and anywhere in the code write this line and enter your access key
 
 ```
-OTIFSolutions\Laravel\Settings\Models\Setting::set('CURRENCY_LAYER_API_ACCESS_KEY', 'Your key goes here');
+OTIFSolutions\Laravel\Settings\Models\Setting::set('currency_layer_access_key', 'Your key goes here');
 ```
 
 
