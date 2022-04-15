@@ -15,10 +15,7 @@ class FetchCurrencyRates extends Command {
 
     public function handle() {
 
-        // user will set the access accessKey and we will use this access accessKey
-        // Setting::set('CURRENCY_LAYER_API_ACCESS_KEY', 'e568ea241bcd6eb1bc61bc9894943f19');
-
-        $accessKey = Setting::get('CURRENCY_LAYER_API_ACCESS_KEY');
+        $accessKey = Setting::get('currency_layer_access_key');
 
         if (!isset($accessKey)) {
             $this->warn('CurrencyLayer API Access key is not set');
