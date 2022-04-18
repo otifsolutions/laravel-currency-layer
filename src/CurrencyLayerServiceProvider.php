@@ -1,8 +1,9 @@
 <?php
 
 // namespace OtifSolutions\CurrencyLayer\CurrencyLayerServiceProvider;
+// namespace App\Providers;
 
-namespace App\Providers;
+namespace OTIFSolutions\CurrencyLayer;
 
 use App\Console\Commands\FetchCurrencyRates;
 use App\Console\Commands\RemoveHistoricalRates;
