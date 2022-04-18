@@ -1,6 +1,6 @@
 <?php
 
-namespace otifsolutions\CurrencyLayerServiceProvider;
+namespace OtifSolutions\CurrencyLayer;
 
 use App\Console\Commands\FetchCurrencyRates;
 use App\Console\Commands\RemoveHistoricalRates;
@@ -17,12 +17,13 @@ class CurrencyLayerServiceProvider extends ServiceProvider {
         include __DIR__ . '/../src/database/seeders/CurrencySeeder.php';
 
         $this->publishes([
-            __DIR__ . '/../public' => public_path('vendor/currency-layer'),
+            __DIR__ . '/../public' => public_path('vendor/laravel-currency-layer'),
         ], 'public');
 
     }
 
     public function boot() {
+
         $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
 
         if ($this->app->runningInConsole()) {
