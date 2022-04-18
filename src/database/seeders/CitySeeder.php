@@ -14,7 +14,7 @@ class CitySeeder extends Seeder {
     public function run() {
 
         set_time_limit(30);
-        $filename = __DIR__ . './../csvFiles/cities.csv';
+        $filename = __DIR__ . './../csvs/cities.csv';
         $rows = $this->csvRowsCount($filename);
         $itemsPerRun = 50000;
         for ($i = 0; $i <= $rows; $i += $itemsPerRun + 1) {

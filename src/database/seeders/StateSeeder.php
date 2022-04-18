@@ -13,7 +13,7 @@ class StateSeeder extends Seeder {
      */
     public function run() {
         $data = [];
-        if (($open = fopen(__DIR__ . './../csvFiles/states.csv', "r + b")) !== FALSE) {
+        if (($open = fopen(__DIR__ . './../csvs/states.csv', "r + b")) !== FALSE) {
             while (($student = fgetcsv($open, NULL, ",")) !== FALSE) {
                 $data[] = $student;
             }

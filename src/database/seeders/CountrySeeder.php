@@ -11,7 +11,7 @@ class CountrySeeder extends Seeder {
 
         $countriesData = [];
 
-        if (($open = fopen(__DIR__ . './../csvFiles/countries.csv', "r + b")) !== FALSE) {
+        if (($open = fopen(__DIR__ . './../csvs/countries.csv', "r + b")) !== FALSE) {
             while (($singleRecord = fgetcsv($open, NULL, ",")) !== FALSE) {
                 $countriesData[] = $singleRecord;
             }
