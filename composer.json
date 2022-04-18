@@ -1,5 +1,5 @@
 {
-  "name": "otifsolutions/laravel-currency-layer",
+  "name": "otifsolutions/currency-layer",
   "description": "This Laravel package provides easy integration with Currency Layer Api along with complete list for countries with flag information. It also comes with command to auto sync rates for each currency",
   "type": "library",
   "license": "MIT",

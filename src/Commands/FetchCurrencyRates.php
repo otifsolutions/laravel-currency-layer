@@ -22,11 +22,6 @@ class FetchCurrencyRates extends Command {
             return;
         }
 
-        if (!(strlen($accessKey) === 32)) {
-            $this->warn('Access key length is not valid');
-            return;
-        }
-
         if (Currency::all()->count() === 0) {
             $this->warn('Currency table is blank | Please run the seed first');
             return;
@@ -41,6 +36,7 @@ class FetchCurrencyRates extends Command {
             ->execute();
 
         if (!isset($response['quotes'])) {
+            // fetch the original error from the response and by that error, show it here in war()
             $this->warn('Please check if monthly API hit limit reached');
             return;
         }

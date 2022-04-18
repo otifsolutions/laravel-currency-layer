@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel {
      * @param Schedule $schedule
      * @return void
      */
-    protected function schedule(Schedule $schedule) : void {
+    protected function schedule(Schedule $schedule) {
          $schedule->command('rates:delete')->daily()->at('08:00');
     }
 
@@ -21,7 +21,7 @@ class Kernel extends ConsoleKernel {
      *
      * @return void
      */
-    protected function commands() : void {
+    protected function commands() {
         $this->load(__DIR__ . '/Commands');
         require base_path('routes/console.php');
     }
