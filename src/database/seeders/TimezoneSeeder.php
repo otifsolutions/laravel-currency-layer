@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\Timezone;
 use Illuminate\Database\Seeder;
 
 class TimezoneSeeder extends Seeder {
@@ -12,36 +11,25 @@ class TimezoneSeeder extends Seeder {
      * @return void
      */
     public function run() {
+        ini_set('max_execution_time', 1000);
         $data = [];
         if (($open = fopen(__DIR__ . './../csvs/countries.csv', 'r + b')) !== FALSE) {
-            while (($singleRecord = fgetcsv($open, NULL, ',')) !== FALSE) {
-                $data[] = $singleRecord;
+            while (($timezone = fgetcsv($open, NULL, ',')) !== FALSE) {
+                $data[] = $timezone;
             }
             fclose($open);
         }
 
-        $data = $this->removeCharacters($data, ['[', ']']);
-        $data = $this->removeCharacters($data, (array)'\/', ' - ');
+        $data = $this->replaceChars($data, ['[', ']']);
+        $data = $this->replaceChars($data, (array)'\/', ' - ');
         $dataNumRecords = count($data);
 
         $resultingArray = [];
         $subArray = [];
+
         for ($i = 1; $i < $dataNumRecords; $i++) {
-            $resultingArray[$i] = ($this->fixJson($data[$i][14]));
-            if (str_contains($resultingArray[$i], '},')) {
-                $subArray[] = $this->fixJsonString(explode('},', $resultingArray[$i]));
-                unset($resultingArray[$i]);
-            }
+            $resultingArray[$data[$i][1]] = ($this->fixJson($data[$i][14]));
         }
-
-        foreach ($subArray as $value) {
-            foreach ($value as $singleArray) {
-                $resultingArray[] = $singleArray;
-            }
-        }
-
-        $index221 = json_decode($resultingArray[221]);
-        $index231 = json_decode($resultingArray[231]);
 
         $jsonData = [];
         foreach ($resultingArray as $singleString) {
@@ -51,32 +39,45 @@ class TimezoneSeeder extends Seeder {
             $jsonData[] = json_decode($singleString);
         }
 
-        // these two records were producing NULL, we enforcelly set decodeJson to the indexes
-        $jsonData[221] = $index221;
-        $jsonData[231] = $index231;
+        foreach ($resultingArray as $key => $jsonData) {
 
-        foreach ($jsonData as $singleRecord) {
-            $singleRecord = (array)($singleRecord);     // converting all StdClass objects to array
-            Timezone::create([
-                'zone_name' => $singleRecord['zoneName'],
-                'gmt_offset' => $singleRecord['gmtOffset'],
-                'gmt_offset_name' => $singleRecord['gmtOffsetName'],
-                'abbreviation' => $singleRecord['abbreviation'],
-                'tz_name' => $singleRecord['tzName'],
-            ]);
+            if (str_contains($resultingArray[$key], '},')) {  // this line means that certain country does have multiple timezones
+                $subArray[] = $this->fixJsonString(explode('},', $resultingArray[$key]));
+                unset($resultingArray[$key]);
+            } else {
+                $subArray[] = $jsonData;
+            }
+
+            $countryObj = Country::where('name', $key)->first();
+
+            $ids = [];
+            foreach ($subArray as $timezone) {
+                if (is_string($timezone)) {     // if string, then  there is single timezone
+                    $ids[] = $this->insertTimezone($timezone);
+                } else {    // if array, there are mulitple timeoznes
+                    $timezones = $this->fixJsonString($timezone);
+                    foreach ($timezones as $singleTimezone) {
+                        $ids[] = $this->insertTimezone($singleTimezone);
+                    }
+                }
+            }
+            $countryObj->timezones()->sync($ids);
         }
     }
 
-    /**
-     * remove certain characters from the strings inside the array, for example an array has strings,
-     * and we want to remove certain or set of characters and replace by another character or string,
-     * like ['one dark', 'darkula', 'oceanic next'] , we want to remove 'a' or replace 'a' by 'c'
-     * @param $hayStack
-     * @param array $charsArray
-     * @param string $character
-     * @return array the array with replace strings
-     */
-    private function removeCharacters($hayStack, array $charsArray, $character = ''): array {
+    public function insertTimezone(string $timezone) {
+        $timezone = json_decode($timezone);
+        $timezoneObj = Timezone::updateOrCreate(['zone_name' => $timezone->zoneName], [
+            'zone_name' => $timezone->zoneName,
+            'gmt_offset' => $timezone->gmtOffset,
+            'gmt_offset_name' => $timezone->gmtOffsetName,
+            'abbreviation' => $timezone->abbreviation,
+            'tz_name' => $timezone->tzName,
+        ]);
+        return $timezoneObj['id'];
+    }
+
+    private function replaceChars($hayStack, array $charsArray, $character = ''): array {
         $tempArray = [];
         foreach ($hayStack as $item) {
             $tempArray[] = str_replace($charsArray, $character, $item);
@@ -84,11 +85,8 @@ class TimezoneSeeder extends Seeder {
         return $tempArray;
     }
 
-    /**
-     * remove certain special characters from strings
-     * @param string $str from to remove
-     * @return string the trimmed, replaced string
-     */
+
+
     public function fixJson(string $str): string {
         return preg_replace(
             '/(?<=(\{|\,))(\w+)(?=\:)/',
@@ -97,11 +95,6 @@ class TimezoneSeeder extends Seeder {
         );
     }
 
-    /**
-     * removed
-     * @param array $stringsArray
-     * @return array
-     */
     private function fixJsonString(array $stringsArray): array {
         foreach ($stringsArray as $iValue) {
             if (!str_contains($iValue, '}')) {

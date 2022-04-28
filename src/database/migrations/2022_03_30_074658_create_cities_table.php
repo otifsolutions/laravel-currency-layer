@@ -15,22 +15,10 @@ return new class extends Migration {
             $table->id();
             $table->string('name');         //  cityName = "ashkasham"
             $table->string('state_code');   // like "BDS"
-            $table->string('state_name');   // like "badakhshan"
-            $table->string('country_code'); // like "AF"
-            $table->string('country_name'); // like "afghanistah"
             $table->float('latitude');     // like "36.68333000"
             $table->float('longitude');    // like "71.53333000"
             $table->string('wiki_data_id');   // like "Q4805192"
-
-            $table->integer('state_id')
-                ->unsigned()
-                ->index()
-                ->nullable();
-
-            $table->foreign('state_id')
-                ->references('id')
-                ->on('states');
-
+            $table->foreignId('state_id')->unique()->references('id')->on('state');
             $table->timestamps();
         });
     }

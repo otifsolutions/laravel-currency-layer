@@ -11,13 +11,9 @@ return new class extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('country_timezone', function (Blueprint $table) {
-            $table->id();
-            $table->integer('country_id')->unsigned()->index();
-            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
-            $table->integer('timezone_id')->unsigned()->index();
-            $table->foreign('timezone_id')->references('id')->on('timezones')->onDelete('cascade');
-            $table->timestamps();
+        Schema::create('country_timezone',  function (Blueprint $table) {
+            $table->foreignId('country_id')->references('id')->on('countries');
+            $table->foreignId('timezone_id')->references('id')->on('timezones');
         });
     }
 

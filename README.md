@@ -10,8 +10,8 @@ __Requirements__
 
 __How to use the Library__
 
-Install via Composer
 
+Install via Composer
 
 __Using Composer (Recommended)__
 
@@ -20,29 +20,27 @@ __Using Composer (Recommended)__
 composer require otifsolutions/laravel-currency-layer 
 ```
 
-__And then run the migrations__
+__And then run the migrations directly after installing package__
 
 ```
 php artisan migrate
 ```
 
-__if database tables are not yet populated with data, run this command__
+__if database tables are not yet populated with data, run the seeders first__
 
 ```
 php artisan db:seed
 ```
 
-__Then Run the migrations__
-
-Grab the access_key by registering on `https://currencylayer.com`, and anywhere in the code write this line and enter your access key
+Grab the access_key by registering on `https://currencylayer.com` here, give the key to the app by tinker or writing this line anywhere in the code
 
 ```
-OTIFSolutions\Laravel\Settings\Models\Setting::set('currency_layer_access_key', 'Your key goes here');
+OTIFSolutions\Laravel\Settings\Models\Setting::set('crkey', 'yourAccessKey');
 ```
 
 
-We won't be storing data in bulk of thousands of records (exchange rates). Set the number of days where data of how many days you want to keep  
+Set the number of days where data of how many days you want to keep :
 
 ```
-OTIFSolutions\Laravel\Settings\Models\Setting::set('rates_save_days', numDays);
+OTIFSolutions\Laravel\Settings\Models\Setting::set('days_rates', numDays);
 ```

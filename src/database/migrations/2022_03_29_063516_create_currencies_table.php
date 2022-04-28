@@ -14,18 +14,9 @@ return new class extends Migration {
         Schema::create('currencies', static function (Blueprint $table) {
             $table->id();
             $table->string('currency');         // "AFN"
-            $table->string('currency_name');    // "Afghan Afghani"
-            $table->string('currency_symbol');  // "؋"
-
-            $table->integer('country_id')
-                ->unsigned()
-                ->index()
-                ->nullable();
-
-            $table->foreign('country_id')
-                ->references('id')
-                ->on('countries');
-
+            $table->string('name');    // "Afghan Afghani"
+            $table->string('symbol');  // "؋"
+            $table->foreignId('country_id')->unique()->references('id')->on('countries');
             $table->timestamps();
         });
     }

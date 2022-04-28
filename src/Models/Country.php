@@ -21,7 +21,7 @@ class Country extends Model {
 
 
     public function timezones() {
-        return $this->belongsToMany(Timezone::class);
+        return $this->belongsToMany(Timezone::class, 'country_timezone', );
     }
 
 

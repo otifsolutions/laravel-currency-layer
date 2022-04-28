@@ -1,17 +1,20 @@
 <?php
 
-// namespace OtifSolutions\CurrencyLayer\CurrencyLayerServiceProvider;
-// namespace App\Providers;
-
 namespace OTIFSolutions\CurrencyLayer;
 
 use App\Console\Commands\FetchCurrencyRates;
 use App\Console\Commands\RemoveHistoricalRates;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Console\Scheduling\Schedule;
 
 class CurrencyLayerServiceProvider extends ServiceProvider {
 
-    public function register(): void {
+    public function register() {
+
+        $this->app->booted(function () {
+            $schedule = $this->app->make(Schedule::class);
+            $schedule->command('rates:delete')->daily()->at('08:00');
+        });
 
         include __DIR__ . '/../src/database/seeders/CountrySeeder.php';
         include __DIR__ . '/../src/database/seeders/TimezoneSeeder.php';

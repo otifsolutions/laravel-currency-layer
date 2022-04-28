@@ -11,7 +11,7 @@ class Timezone extends Model {
     protected $guarded = ['id'];
 
     public function countries() {
-        return $this->belongsToMany(Country::class);
+        return $this->belongsToMany(Country::class, 'country_timezone');
     }
 
 }

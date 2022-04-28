@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('numeric_code');     // "004"
             $table->string('phone_code');       // "93"
             $table->string('capital');          // "Kabul"
-            $table->string('tld')->nullable();  // ".af"
+            $table->string('tld');  // ".af"
             $table->string('native');           // "افغانستان"
             $table->string('region');           // "Asia"
             $table->string('subregion');        // "Southern Asia"

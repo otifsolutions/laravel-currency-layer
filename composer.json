@@ -26,6 +26,7 @@
     "ext-json": "*",
     "ext-dom": "*",
     "otifsolutions/curl-handler": "*",
-    "otifsolutions/laravel-settings": "*"
+    "otifsolutions/laravel-settings": "*",
+    "halaxa/json-machine": "*"
   }
 }

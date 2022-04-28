@@ -8,37 +8,25 @@ use Illuminate\Database\Seeder;
 class CountrySeeder extends Seeder {
 
     public function run() {
+        $countries = json_decode(file_get_contents(__DIR__ . './../jsons/countries.json'), true, 512, JSON_THROW_ON_ERROR);
 
-        $countriesData = [];
-
-        if (($open = fopen(__DIR__ . './../csvs/countries.csv', "r + b")) !== FALSE) {
-            while (($singleRecord = fgetcsv($open, NULL, ",")) !== FALSE) {
-                $countriesData[] = $singleRecord;
-            }
-
-            fclose($open);
-        }
-
-        $countriesData = array_slice($countriesData, '1');  // slice the first row, colomnNames
-
-        foreach ($countriesData as $singleRecord) {
+        foreach ($countries as $country) {
             Country::updateOrCreate([
-                'name' => $singleRecord[1],
-                'iso3' => $singleRecord[2],
-                'iso2' => $singleRecord[3],
-                'numeric_code' => $singleRecord[4],
-                'phone_code' => $singleRecord[5],
-                'capital' => $singleRecord[6],
-                'tld' => $singleRecord[10],
-                'native' => $singleRecord[11],
-                'region' => $singleRecord[12],
-                'subregion' => $singleRecord[13],
-                'latitude' => $singleRecord[15],
-                'longitude' => $singleRecord[16],
-                'flag' => strtolower($singleRecord[3]) . '.png',
+                'name' => $country['name'], // Afghanistan
+                'iso3' => $country['iso3'], // AFG
+                'iso2' => $country['iso2'], // af
+                'numeric_code' => $country['numeric_code'], // 004
+                'phone_code' => $country['phone_code'], // +93
+                'capital' => $country['capital'],   // Kabul
+                'tld' => $country['tld'],   //  .af
+                'native' => $country['native'], // افغانستان
+                'region' => $country['region'], // Asia
+                'subregion' => $country['subregion'],   // southern Asia
+                'latitude' => $country['latitude'],
+                'longitude' => $country['longitude'],
+                'flag' => $country['flag']
             ]);
         }
-
     }
 
 }
