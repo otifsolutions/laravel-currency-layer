@@ -65,7 +65,7 @@ class TimezoneSeeder extends Seeder {
         }
     }
 
-    public function insertTimezone(string $timezone) {
+    private function insertTimezone(string $timezone) {
         $timezone = json_decode($timezone);
         $timezoneObj = Timezone::updateOrCreate(['zone_name' => $timezone->zoneName], [
             'zone_name' => $timezone->zoneName,
@@ -87,7 +87,7 @@ class TimezoneSeeder extends Seeder {
 
 
 
-    public function fixJson(string $str): string {
+    private function fixJson(string $str): string {
         return preg_replace(
             '/(?<=(\{|\,))(\w+)(?=\:)/',
             '"$2"',
