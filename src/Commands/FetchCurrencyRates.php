@@ -14,7 +14,6 @@ class FetchCurrencyRates extends Command {
     protected $description = 'Hits the currency layer api, fetch the exchange rates';
 
     public function handle() {
-        // Setting::set('crkey', 'e568ea241bcd6eb1bc61bc9894943f19');
         $accessKey = Setting::get('crkey');
 
         $ratesSaveDays = Setting::get('days_rates');   // data of how many days we want to store

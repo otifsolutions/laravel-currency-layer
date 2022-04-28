@@ -26,13 +26,13 @@ __And then run the migrations directly after installing package__
 php artisan migrate
 ```
 
-__if database tables are not yet populated with data, run the seeders first__
+__if database tables are not yet populated, run the seeders first__
 
 ```
 php artisan db:seed
 ```
 
-Grab the access_key by registering on `https://currencylayer.com` here, give the key to the app by tinker or writing this line anywhere in the code
+Grab the access key by registering on `https://currencylayer.com`, give the key to the app by tinker or writing this line anywhere in the code
 
 ```
 OTIFSolutions\Laravel\Settings\Models\Setting::set('crkey', 'yourAccessKey');
