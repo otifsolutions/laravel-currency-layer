@@ -17,7 +17,7 @@ __Using Composer (Recommended)__
 
 
 ```
-composer require otifsolutions/laravel-currency-layer 
+composer require otifsolutions/currency-layer 
 ```
 
 __And then run the migrations directly after installing package__
