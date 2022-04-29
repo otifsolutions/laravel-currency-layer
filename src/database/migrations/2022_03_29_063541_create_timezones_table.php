@@ -13,7 +13,7 @@ return new class extends Migration {
     public function up() {
         Schema::create('timezones', static function (Blueprint $table) {
             $table->id();
-            $table->string('zone_name');        // "Asia Kabul"
+            $table->string('name');        // "Asia Kabul"
             $table->string('gmt_offset');       // 16200
             $table->string('gmt_offset_name');  // "UTC+04:30"
             $table->string('abbreviation');     // "AFT"

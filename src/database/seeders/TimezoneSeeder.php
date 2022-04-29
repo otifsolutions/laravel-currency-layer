@@ -67,8 +67,8 @@ class TimezoneSeeder extends Seeder {
 
     private function insertTimezone(string $timezone) {
         $timezone = json_decode($timezone);
-        $timezoneObj = Timezone::updateOrCreate(['zone_name' => $timezone->zoneName], [
-            'zone_name' => $timezone->zoneName,
+        $timezoneObj = Timezone::updateOrCreate(['name' => $timezone->zoneName], [
+            'name' => $timezone->zoneName,
             'gmt_offset' => $timezone->gmtOffset,
             'gmt_offset_name' => $timezone->gmtOffsetName,
             'abbreviation' => $timezone->abbreviation,
