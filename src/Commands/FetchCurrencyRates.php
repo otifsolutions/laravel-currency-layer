@@ -24,8 +24,12 @@ class FetchCurrencyRates extends Command {
         }
 
         if (Currency::all()->count() === 0) {
-            $this->warn('Currency Table is blank | Running the seeders ');
+            $this->warn('Currency Table is blank | Seeders Started Running ...');
+            $this->newLine("****************************");
+            $this->newLine("*****  Seeders Running *****");
+            $this->newLine("****************************");
             \Artisan::call('db:seed');
+            $this->newLine();
             return;
         }
 
