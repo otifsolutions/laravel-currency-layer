@@ -42,6 +42,10 @@ class FetchCurrencyRates extends Command {
             return;
         }
 
+
+        $bar = $this->output->createProgressBar(count($response['quotes']));
+        $bar->start();
+
         foreach ($response['quotes'] as $i => $value) {
             $baseCurrency = substr($i, 0, 3);
             $childCurrency = substr($i, 3, 6);
@@ -55,7 +59,11 @@ class FetchCurrencyRates extends Command {
                     'exchange_rates' => $value
                 ]);
             }
+            $bar->advance();
         }
+
+        $bar->finish();
+        $bar->newLine();
 
         $this->info('Exchange rates synced successfully');
 
