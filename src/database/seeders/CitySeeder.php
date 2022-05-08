@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\City;
+use App\Models\State;
 use Illuminate\Database\Seeder;
 use JsonMachine\Exception\InvalidArgumentException;
 use JsonMachine\Items;
