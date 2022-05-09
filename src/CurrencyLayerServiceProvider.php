@@ -16,11 +16,11 @@ class CurrencyLayerServiceProvider extends ServiceProvider {
             $schedule->command('rates:delete')->daily()->at('08:00');
         });
 
-        include __DIR__ . '/database/seeders/CountrySeeder.php';
-        include __DIR__ . '/database/seeders/TimezoneSeeder.php';
-        include __DIR__ . '/database/seeders/StateSeeder.php';
-        include __DIR__ . '/database/seeders/CitySeeder.php';
-        include __DIR__ . '/database/seeders/CurrencySeeder.php';
+        include __DIR__ . '/Database/Seeders/CountrySeeder.php';
+        include __DIR__ . '/Database/Seeders/TimezoneSeeder.php';
+        include __DIR__ . '/Database/Seeders/StateSeeder.php';
+        include __DIR__ . '/Database/Seeders/CitySeeder.php';
+        include __DIR__ . '/Database/Seeders/CurrencySeeder.php';
 
 
         $this->publishes([
@@ -30,7 +30,7 @@ class CurrencyLayerServiceProvider extends ServiceProvider {
     }
 
     public function boot() {
-        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/Database/migrations');
 
         if ($this->app->runningInConsole()) {
             $this->commands([
