@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Console\Commands;
+namespace OTIFSolutions\CurrencyLayer\Commands;
 
-use App\Models\CurrencyRate;
+use OTIFSolutions\CurrencyLayer\Models\CurrencyRate;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use OTIFSolutions\Laravel\Settings\Models\Setting;

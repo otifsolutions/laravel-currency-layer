@@ -1,12 +1,9 @@
 <?php
 
-namespace Database\Seeders;
+namespace OTIFSolutions\CurrencyLayer\Seeders;
 
-use App\Models\City;
-use App\Models\Country;
-use App\Models\Currency;
-use App\Models\State;
-use App\Models\Timezone;
+use OTIFSolutions\CurrencyLayer\Models\{City, Country, Currency, State, Timezone};
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder {

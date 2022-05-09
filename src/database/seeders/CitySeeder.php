@@ -1,9 +1,8 @@
 <?php
 
-namespace Database\Seeders;
+namespace OTIFSolutions\CurrencyLayer\Seeders;
 
-use App\Models\City;
-use App\Models\State;
+use OTIFSolutions\CurrencyLayer\Models\{City, State};
 use Illuminate\Database\Seeder;
 use JsonMachine\Exception\InvalidArgumentException;
 use JsonMachine\Items;

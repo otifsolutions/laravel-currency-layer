@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace OTIFSolutions\CurrencyLayer\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -19,10 +19,8 @@ class Country extends Model {
         return $this->hasMany(State::class);
     }
 
-
     public function timezones() {
         return $this->belongsToMany(Timezone::class, 'country_timezone', );
     }
-
 
 }

@@ -1,9 +1,8 @@
 <?php
 
-namespace Database\Seeders;
+namespace OTIFSolutions\CurrencyLayer\Seeders;
 
-use App\Models\Country;
-use App\Models\Currency;
+use OTIFSolutions\CurrencyLayer\Models\{Country, Currency};
 use Illuminate\Database\Seeder;
 
 class CurrencySeeder extends Seeder {

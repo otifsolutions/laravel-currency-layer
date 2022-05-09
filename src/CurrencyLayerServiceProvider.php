@@ -1,9 +1,10 @@
 <?php
 
-namespace OTIFSolutions\CurrencyLayer;
+namespace OTIFSolutions\CurrencyLayer\Providers;
 
-use App\Console\Commands\FetchCurrencyRates;
-use App\Console\Commands\RemoveHistoricalRates;
+use OTIFSolutions\CurrencyLayer\Commands\FetchCurrencyRates;
+use OTIFSolutions\CurrencyLayer\Commands\RemoveHistoricalRates;
+
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Console\Scheduling\Schedule;
 
@@ -23,7 +24,7 @@ class CurrencyLayerServiceProvider extends ServiceProvider {
         include __DIR__ . '/../src/database/seeders/CurrencySeeder.php';
 
         $this->publishes([
-            __DIR__ . '/../public' => public_path('vendor/laravel-currency-layer'),
+            __DIR__ . '/../public' => public_path('flags/'),
         ], 'public');
 
     }

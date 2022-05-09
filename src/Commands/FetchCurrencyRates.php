@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Console\Commands;
+namespace OTIFSolutions\CurrencyLayer\Commands;
 
-use App\Models\Currency;
-use App\Models\CurrencyRate;
 use Illuminate\Console\Command;
+
+use OTIFSolutions\CurrencyLayer\Models\{Currency, CurrencyRate};
 use OTIFSolutions\CurlHandler\Curl;
 use OTIFSolutions\Laravel\Settings\Models\Setting;
 

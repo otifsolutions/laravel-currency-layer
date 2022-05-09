@@ -1,9 +1,8 @@
 <?php
 
-namespace Database\Seeders;
+namespace OTIFSolutions\CurrencyLayer\Seeders;
 
-use App\Models\Country;
-use App\Models\State;
+use OTIFSolutions\CurrencyLayer\Models\{Country, State};
 use Illuminate\Database\Seeder;
 use JsonMachine\Items;
 
