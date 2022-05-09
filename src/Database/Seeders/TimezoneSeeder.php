@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 
 class TimezoneSeeder extends Seeder {
     /**
-     * Run the database seeds.
+     * Run the Database seeds.
      *
      * @return void
      */

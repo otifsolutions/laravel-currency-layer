@@ -9,7 +9,7 @@ use JsonMachine\Items;
 
 class CitySeeder extends Seeder {
     /**
-     * Run the database seeds.
+     * Run the Database seeds.
      *
      * @return void
      * @throws InvalidArgumentException

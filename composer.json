@@ -11,8 +11,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "OTIFSolutions\\CurrencyLayer\\": "src/",
-      "OTIFSolutions\\CurrencyLayer\\Database\\Seeders": "src/database/seeders"
+      "OTIFSolutions\\CurrencyLayer\\": "src/"
     }
   },
   "extra": {
