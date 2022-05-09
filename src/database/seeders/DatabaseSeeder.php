@@ -1,6 +1,6 @@
 <?php
 
-namespace OTIFSolutions\CurrencyLayer\Seeders;
+namespace OTIFSolutions\CurrencyLayer\Database\Seeders;
 
 use OTIFSolutions\CurrencyLayer\Models\{City, Country, Currency, State, Timezone};
 

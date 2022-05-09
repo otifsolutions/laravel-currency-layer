@@ -35,7 +35,6 @@ class CurrencyLayerServiceProvider extends ServiceProvider {
             __DIR__ . '/../public' => public_path('flags/'),
         ], 'otifsolutions-flags');
 
-
     }
 
     public function boot() {
