@@ -1,12 +1,11 @@
 <?php
 
-namespace OTIFSolutions\CurrencyLayer\Providers;
+namespace OTIFSolutions\CurrencyLayer;
 
+use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Support\ServiceProvider;
 use OTIFSolutions\CurrencyLayer\Commands\FetchCurrencyRates;
 use OTIFSolutions\CurrencyLayer\Commands\RemoveHistoricalRates;
-
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Console\Scheduling\Schedule;
 
 class CurrencyLayerServiceProvider extends ServiceProvider {
 
