@@ -16,20 +16,21 @@ class CurrencyLayerServiceProvider extends ServiceProvider {
             $schedule->command('rates:delete')->daily()->at('08:00');
         });
 
-        include __DIR__ . '/../src/database/seeders/CountrySeeder.php';
-        include __DIR__ . '/../src/database/seeders/TimezoneSeeder.php';
-        include __DIR__ . '/../src/database/seeders/StateSeeder.php';
-        include __DIR__ . '/../src/database/seeders/CitySeeder.php';
-        include __DIR__ . '/../src/database/seeders/CurrencySeeder.php';
+        include __DIR__ . '/database/seeders/CountrySeeder.php';
+        include __DIR__ . '/database/seeders/TimezoneSeeder.php';
+        include __DIR__ . '/database/seeders/StateSeeder.php';
+        include __DIR__ . '/database/seeders/CitySeeder.php';
+        include __DIR__ . '/database/seeders/CurrencySeeder.php';
+
 
         $this->publishes([
-            __DIR__ . '/../public' => public_path('flags/'),
+            __DIR__ . '/public' => public_path('flags/'),
         ], 'otifsolutions-flags');
 
     }
 
     public function boot() {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
         if ($this->app->runningInConsole()) {
             $this->commands([
