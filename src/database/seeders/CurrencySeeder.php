@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 class CurrencySeeder extends Seeder {
 
     /**
-     * Run the Database seeds.
+     * Run the database seeds.
      *
      * @return void
      */

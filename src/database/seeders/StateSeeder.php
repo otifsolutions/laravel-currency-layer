@@ -8,7 +8,7 @@ use JsonMachine\Items;
 
 class StateSeeder extends Seeder {
     /**
-     * Run the Database seeds.
+     * Run the database seeds.
      *
      * @return void
      * @throws \JsonMachine\Exception\InvalidArgumentException
