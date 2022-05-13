@@ -12,6 +12,7 @@ return new class extends Migration {
      */
     public function up() {
         Schema::create('countries', function (Blueprint $table) {
+            $table->engine = 'MYISAM';
             $table->id();
             $table->string('name');             // "Afghanistan"
             $table->string('iso3');             // "AFG"

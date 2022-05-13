@@ -12,6 +12,7 @@ return new class extends Migration {
      */
     public function up() {
         Schema::create('timezones', static function (Blueprint $table) {
+            $table->engine = 'MYISAM';
             $table->id();
             $table->string('name');        // "Asia Kabul"
             $table->string('gmt_offset');       // 16200

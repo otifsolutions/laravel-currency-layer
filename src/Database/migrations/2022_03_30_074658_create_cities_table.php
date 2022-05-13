@@ -12,6 +12,7 @@ return new class extends Migration {
      */
     public function up() {
         Schema::create('cities', function (Blueprint $table) {
+            $table->engine = 'MYISAM';
             $table->id();
             $table->string('name');         //  cityName = "ashkasham"
             $table->string('state_code');   // like "BDS"
