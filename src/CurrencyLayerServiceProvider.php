@@ -36,15 +36,15 @@ class CurrencyLayerServiceProvider extends ServiceProvider {
     public function publishResources() {
         $this->publishes([
             __DIR__ . '/config/database.php' => config_path('database.php'),
-        ], 'randomable-config');
+        ], 'otif-config');
 
         $this->publishes([
             __DIR__ . 'Database/Seeders/DatabaseSeeder.php' => database_path('Seeders/DatabaseSeeder.php'),
-        ], 'database-seeder');
+        ], 'otif-seeder');
 
         $this->publishes([
             __DIR__ . '/public/flags' => public_path('flags/'),
-        ], 'country-flags');
+        ], 'otif-flags');
 
     }
 
