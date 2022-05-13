@@ -26,13 +26,22 @@ __And then run the migrations directly after installing package__
 php artisan migrate
 ```
 
-__if database tables are not yet populated, run the seeders first__
+__Note : Before running the migrations, change your connected database mysql engine to MyIsam__
+
+Go to `config/Database.php` and in key `connection.mysql`, change `engine => NULL` to `engine => 'myIsam' `
+
+
+
+__if database tables are not yet populated, run the seeders__
+
 
 ```
 php artisan db:seed
 ```
 
+
 Grab the access key by registering on `https://currencylayer.com`, give the key to the app by tinker or writing this line anywhere in the code
+
 
 ```
 OTIFSolutions\Laravel\Settings\Models\Setting::set('crkey', 'yourAccessKey');
@@ -40,6 +49,7 @@ OTIFSolutions\Laravel\Settings\Models\Setting::set('crkey', 'yourAccessKey');
 
 
 Set the number of days where data of how many days you want to keep :
+
 
 ```
 OTIFSolutions\Laravel\Settings\Models\Setting::set('days_rates', numDays);
