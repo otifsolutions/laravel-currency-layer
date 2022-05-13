@@ -12,9 +12,9 @@ class PublishResources extends Command {
 
     public function handle() {
 
-        Artisan::call('php artisan vendor:publish --tag=otif-config');
-        Artisan::call('php artisan vendor:publish --tag=otif-seeder');
-        Artisan::call('php artisan vendor:publish --tag=otif-flags');
+        Artisan::call('vendor:publish --tag=otif-config');
+        Artisan::call('vendor:publish --tag=otif-seeder');
+        Artisan::call('vendor:publish --tag=otif-flags');
 
         $this->newLine();
         $this->line('resources published');
