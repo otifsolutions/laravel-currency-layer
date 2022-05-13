@@ -5,6 +5,7 @@ namespace OTIFSolutions\CurrencyLayer;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
 use OTIFSolutions\CurrencyLayer\Commands\FetchCurrencyRates;
+use OTIFSolutions\CurrencyLayer\Commands\PublishResources;
 use OTIFSolutions\CurrencyLayer\Commands\RemoveHistoricalRates;
 
 class CurrencyLayerServiceProvider extends ServiceProvider {
@@ -26,8 +27,10 @@ class CurrencyLayerServiceProvider extends ServiceProvider {
         if ($this->app->runningInConsole()) {
             $this->commands([
                 FetchCurrencyRates::class,
-                RemoveHistoricalRates::class
+                RemoveHistoricalRates::class,
+                PublishResources::class
             ]);
+
             $this->publishResources();
         }
 
