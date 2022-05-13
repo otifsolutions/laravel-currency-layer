@@ -26,11 +26,6 @@ __And then run the migrations directly after installing package__
 php artisan migrate
 ```
 
-__Note : Before running the migrations, change your connected database mysql engine to MyIsam__
-
-Go to `config/Database.php` and in key `connection.mysql`, change `engine => NULL` to `engine => 'myIsam' `
-
-
 
 __if database tables are not yet populated, run the seeders__
 
