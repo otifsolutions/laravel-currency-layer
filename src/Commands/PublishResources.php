@@ -17,7 +17,7 @@ class PublishResources extends Command {
         Artisan::call('vendor:publish --tag=otif-flags');
 
         $this->newLine();
-        $this->line('resources published');
+        $this->info('Resources published successfully');
         $this->newLine();
 
         return 0;

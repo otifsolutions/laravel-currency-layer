@@ -3,7 +3,7 @@
 return [
     'connections' => [
         'mysql' => [
-            'engine' => 'myIsam'
+            'engine' => 'MYISAM'
         ]
     ]
 ];
