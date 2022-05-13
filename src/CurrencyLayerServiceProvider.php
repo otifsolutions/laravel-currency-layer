@@ -11,21 +11,12 @@ class CurrencyLayerServiceProvider extends ServiceProvider {
 
     public function register() {
 
+        $this->mergeConfigFrom(__DIR__ . '/config/database.php', 'db-engine-config');
+
         $this->app->booted(function () {
             $schedule = $this->app->make(Schedule::class);
             $schedule->command('rates:delete')->daily()->at('08:00');
         });
-
-        include __DIR__ . '/Database/Seeders/CountrySeeder.php';
-        include __DIR__ . '/Database/Seeders/TimezoneSeeder.php';
-        include __DIR__ . '/Database/Seeders/StateSeeder.php';
-        include __DIR__ . '/Database/Seeders/CitySeeder.php';
-        include __DIR__ . '/Database/Seeders/CurrencySeeder.php';
-
-
-        $this->publishes([
-            __DIR__ . '/public' => public_path('flags/'),
-        ], 'otifsolutions-flags');
 
     }
 
@@ -37,7 +28,24 @@ class CurrencyLayerServiceProvider extends ServiceProvider {
                 FetchCurrencyRates::class,
                 RemoveHistoricalRates::class
             ]);
+            $this->publishResources();
         }
+
+    }
+
+    public function publishResources() {
+        $this->publishes([
+            __DIR__ . '/config/database.php' => config_path('database.php'),
+        ], 'randomable-config');
+
+        $this->publishes([
+            __DIR__ . 'Database/Seeders/DatabaseSeeder.php' => database_path('Seeders/DatabaseSeeder.php'),
+        ], 'database-seeder');
+
+        $this->publishes([
+            __DIR__ . '/public/flags' => public_path('flags/'),
+        ], 'country-flags');
+
     }
 
 }
