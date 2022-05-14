@@ -12,7 +12,7 @@ return new class extends Migration {
      */
     public function up() {
         Schema::create('states', function (Blueprint $table) {
-            $table->engine = 'MYISAM';
+            $table->engine = 'myIsam';
             $table->id();
             $table->string('name');             // state name like "badakhshan"
             $table->string('country_code');     // country code like "AF" for afghanistan

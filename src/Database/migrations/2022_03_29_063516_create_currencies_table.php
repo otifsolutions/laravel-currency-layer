@@ -12,7 +12,7 @@ return new class extends Migration {
      */
     public function up() {
         Schema::create('currencies', static function (Blueprint $table) {
-            $table->engine = 'MYISAM';
+            $table->engine = 'myIsam';
             $table->id();
             $table->string('currency');         // "AFN"
             $table->string('name');    // "Afghan Afghani"

@@ -12,8 +12,6 @@ class CurrencyLayerServiceProvider extends ServiceProvider {
 
     public function register() {
 
-        $this->mergeConfigFrom(__DIR__ . '/config/database.php', 'db-engine-config');
-
         $this->app->booted(function () {
             $schedule = $this->app->make(Schedule::class);
             $schedule->command('rates:delete')->daily()->at('08:00');
@@ -37,12 +35,17 @@ class CurrencyLayerServiceProvider extends ServiceProvider {
     }
 
     public function publishResources() {
-        $this->publishes([
-            __DIR__ . '/config/database.php' => config_path('database.php'),
-        ], 'otif-config');
 
         $this->publishes([
-            __DIR__ . 'Database/Seeders/DatabaseSeeder.php' => database_path('Seeders/DatabaseSeeder.php'),
+            __DIR__ . '/Database/csvs/' => database_path('csvs/')
+        ], 'otif-csvs');
+
+        $this->publishes([
+            __DIR__ . '/Database/jsons/' => database_path('jsons/')
+        ], 'otif-jsons');
+
+        $this->publishes([
+            __DIR__ . '/Database/Seeders/DatabaseSeeder.php' => database_path('Seeders/DatabaseSeeder.php'),
         ], 'otif-seeder');
 
         $this->publishes([

@@ -12,7 +12,7 @@ return new class extends Migration {
      */
     public function up() {
         Schema::create('currency_rates', function (Blueprint $table) {
-            $table->engine = 'MYISAM';
+            $table->engine = 'myIsam';
             $table->id();
             $table->foreignId('currency_id')->references('id')->on('currencies');
             $table->string('baseCr', 10);   // the source

@@ -2,8 +2,6 @@
 
 namespace OTIFSolutions\CurrencyLayer\Database\Seeders;
 
-use OTIFSolutions\CurrencyLayer\Models\{City, Country, Currency, State, Timezone};
-
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder {
@@ -15,11 +13,11 @@ class DatabaseSeeder extends Seeder {
     public function run() {
 
         $this->call([
-            Country::class,
-            Timezone::class,
-            State::class,
-            Currency::class,
-            City::class
+            CountrySeeder::class,
+            TimezoneSeeder::class,
+            StateSeeder::class,
+            CurrencySeeder::class,
+            CitySeeder::class
         ]);
 
     }
