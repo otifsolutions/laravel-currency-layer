@@ -32,6 +32,7 @@ __Then, run this command to seed/populate all tables__
 php artisan run:seeders
 ```
 
+<br>
 Grab the access key by registering on `https://currencylayer.com`, give the key to the app by tinker or writing this line anywhere in the code
 
 ```
@@ -46,14 +47,17 @@ OTIFSolutions\Laravel\Settings\Models\Setting::set('days_rates', numDays);
 
 __After setting everything and using API key with the package, you can synchronize currency data__
 
-Hit this command to fetch the currency rates
+> Hit this command to fetch the currency rates
+
 ```
 php artisan rates:get
 ```
 
-Hit this command to remove the currency rates data
+> Hit this command to remove the currency rates data
+
 ```
 php artisan rates:delete
 ```
-Note :
-    Command `rates:delete` will only be fired when you already given the `days_rates` key
+**Note :**
+
+> Command `rates:delete` will only be fired when you already given the `days_rates` key
