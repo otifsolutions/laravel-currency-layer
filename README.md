@@ -26,25 +26,19 @@ __And then run the migrations directly after installing package__
 php artisan migrate
 ```
 
-
 __Then, run this command to seed/populate all tables__
-
 
 ```
 php artisan run:seeders
 ```
 
-
 Grab the access key by registering on `https://currencylayer.com`, give the key to the app by tinker or writing this line anywhere in the code
-
 
 ```
 OTIFSolutions\Laravel\Settings\Models\Setting::set('crkey', 'yourAccessKey');
 ```
 
-
 Set the number of days where data of how many days you want to keep :
-
 
 ```
 OTIFSolutions\Laravel\Settings\Models\Setting::set('days_rates', numDays);
