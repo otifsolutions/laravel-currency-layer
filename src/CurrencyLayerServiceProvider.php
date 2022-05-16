@@ -30,6 +30,9 @@ class CurrencyLayerServiceProvider extends ServiceProvider {
 
         }
 
+        $this->publishes([
+            __DIR__ . '/public/flags' => public_path('flags/')
+        ], 'otif-flags');
     }
 
 }
