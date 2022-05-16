@@ -51,7 +51,7 @@ Hit this command to fetch the currency rates
 php artisan rates:get
 ```
 
-Hit this command to remove or partially remove the currency rates data
+Hit this command to remove the currency rates data
 ```
 php artisan rates:delete
 ```
