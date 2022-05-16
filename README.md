@@ -33,7 +33,7 @@ php artisan run:seeders
 ```
 
 <br>
-Grab the access key by registering on `https://currencylayer.com`, give the key to the app by tinker or writing this line anywhere in the code
+Grab the access key by registering on **[CurrencyLayer](https://currencylayer.com, "Reliable Exchange Rates & Currency Conversion for your Business")**, give the key to the app by tinker or writing this line anywhere in the code
 
 ```
 OTIFSolutions\Laravel\Settings\Models\Setting::set('crkey', 'yourAccessKey');
@@ -42,12 +42,12 @@ OTIFSolutions\Laravel\Settings\Models\Setting::set('crkey', 'yourAccessKey');
 Set the number of days where data of how many days you want to keep :
 
 ```
-OTIFSolutions\Laravel\Settings\Models\Setting::set('days_rates', numDays);
+OTIFSolutions\Laravel\Settings\Models\Setting::set('days_rates', numberOfDays);
 ```
 
 __After setting everything and using API key with the package, you can synchronize currency data__
 
-> Hit this command to fetch the currency rates
+> Hit this command to fetch the currency rates data
 
 ```
 php artisan rates:get
@@ -60,4 +60,4 @@ php artisan rates:delete
 ```
 **Note :**
 
-> Command `rates:delete` will only be fired when you already given the `days_rates` key
+> Command `rates:delete` will only be fired when you already have given the `days_rates` value/key
