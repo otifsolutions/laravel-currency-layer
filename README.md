@@ -27,11 +27,11 @@ php artisan migrate
 ```
 
 
-__if database tables are not yet populated, run the seeders__
+__Then, run this command to seed/populate all tables__
 
 
 ```
-php artisan db:seed
+php artisan run:seeders
 ```
 
 
@@ -49,3 +49,17 @@ Set the number of days where data of how many days you want to keep :
 ```
 OTIFSolutions\Laravel\Settings\Models\Setting::set('days_rates', numDays);
 ```
+
+__After setting everything and using API key with the package, you can synchronize currency data__
+
+Hit this command to fetch the currency rates
+```
+php artisan rates:get
+```
+
+Hit this command to remove or partially remove the currency rates data
+```
+php artisan rates:delete
+```
+Note :
+    Command `rates:delete` will only be fired when you already given the `days_rates` key

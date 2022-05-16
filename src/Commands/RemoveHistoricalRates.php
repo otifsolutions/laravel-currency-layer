@@ -9,8 +9,8 @@ use OTIFSolutions\Laravel\Settings\Models\Setting;
 
 class RemoveHistoricalRates extends Command {
 
-    protected $signature = 'rates:delete';
-    protected $description = 'Remove all the exchange rates';
+    protected $signature = 'rates:sync';
+    protected $description = 'Will remove or partially remove the exchange rates from exchange rates table';
 
     public function handle() {
 
