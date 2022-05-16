@@ -4,6 +4,7 @@ namespace OTIFSolutions\CurrencyLayer\Database\Seeders;
 
 use OTIFSolutions\CurrencyLayer\Models\Country;
 use Illuminate\Database\Seeder;
+use OTIFSolutions\CurrencyLayer\Models\Timezone;
 
 class TimezoneSeeder extends Seeder {
     /**
@@ -85,8 +86,6 @@ class TimezoneSeeder extends Seeder {
         }
         return $tempArray;
     }
-
-
 
     private function fixJson(string $str): string {
         return preg_replace(
