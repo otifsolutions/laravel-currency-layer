@@ -26,7 +26,7 @@ __And then run the migrations directly after installing package__
 php artisan migrate
 ```
 
-__Then, run this command to seed/populate all tables__
+__Then, run this command to seed/populate all tables, let the seeds complete and please don't touch the code__
 
 ```
 php artisan run:seeders
