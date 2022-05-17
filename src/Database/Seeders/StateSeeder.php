@@ -2,9 +2,9 @@
 
 namespace OTIFSolutions\CurrencyLayer\Database\Seeders;
 
-use OTIFSolutions\CurrencyLayer\Models\{Country, State};
 use Illuminate\Database\Seeder;
 use JsonMachine\Items;
+use OTIFSolutions\CurrencyLayer\Models\{Country, State};
 
 class StateSeeder extends Seeder {
     /**
@@ -15,23 +15,19 @@ class StateSeeder extends Seeder {
      */
     public function run() {
         $states = Items::fromFile(__DIR__ . './../jsons/states.json');
-        $data = [];
         foreach ($states as $state) {
-            $data[] = [
+
+            State::updateOrCreate([
                 'name' => $state->name,
-                'country_code' => $state->country_code,
-                'state_code' => $state->state_code,
-                'country_id' => Country::where('iso2', $state->country_code)->first()['id'],
-                'latitude' => $state->latitude,
-                'longitude' => $state->longitude
-            ];
-
+                'state_code' => $state->state_code
+            ],
+                [
+                    'name' => $state->name,
+                    'state_code' => $state->state_code,
+                    'country_id' => Country::where('iso2', $state->country_code)->first()['id'],
+                    'latitude' => $state->latitude,
+                    'longitude' => $state->longitude
+                ]);
         }
-
-        State::upsert($data, [
-            'name', 'country_code'
-        ], ['name', 'country_code', 'state_code', 'country_id', 'latitude', 'longitude']);
-
     }
-
 }
