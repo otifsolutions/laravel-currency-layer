@@ -32,7 +32,6 @@ __Then, run this command to seed/populate all tables, let the seeds complete and
 php artisan run:seeders
 ```
 
-<br>
 Grab the access key by registering on **[CurrencyLayer](https://currencylayer.com)**, give the key to the app by tinker or writing this line anywhere in the code
 
 ```
@@ -45,8 +44,8 @@ Set the `numberOfDays`, where this is data of how many days you want to keep :
 OTIFSolutions\Laravel\Settings\Models\Setting::set('days_rates', numberOfDays);
 ```
 
-<br>
 __After setting everything and using API key with the package, you can synchronize currency data__
+
 
 > Hit this command to fetch the exchange rates data
 
