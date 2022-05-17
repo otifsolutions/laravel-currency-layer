@@ -15,7 +15,6 @@ return new class extends Migration {
             $table->engine = 'myIsam';
             $table->id();
             $table->string('name');         //  cityName = "ashkasham"
-            $table->string('state_code');   // like "BDS"
             $table->float('latitude');     // like "36.68333000"
             $table->float('longitude');    // like "71.53333000"
             $table->string('wiki_data_id');   // like "Q4805192"
