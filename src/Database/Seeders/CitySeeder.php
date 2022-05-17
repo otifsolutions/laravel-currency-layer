@@ -17,25 +17,19 @@ class CitySeeder extends Seeder {
     public function run() {
         ini_set('max_execution_time', 1000);
         $cities = Items::fromFile(__DIR__ . './../jsons/cities.json');
-        $data = collect();
 
         foreach ($cities as $key => $city) {
-            $data[$key] = [
+            City::updateOrCreate([
+                'name' => $city->name,
+                'state_code' => $city->state_code
+            ], [
                 'name' => $city->name,
                 'state_code' => $city->state_code,
                 'latitude' => $city->latitude,
                 'longitude' => $city->longitude,
                 'wiki_data_id' => $city->wikiDataId,
                 'state_id' => State::where('state_code', $city->state_code)->first()['id']
-            ];
+            ]);
         }
-
-        foreach ($data->chunk(5000) as $chunk) {
-            City::upsert($chunk->toArray(), [
-                'name', 'state_id'
-            ], ['name', 'state_code', 'latitude', 'longitude', 'wiki_data_id', 'state_id']);
-        }
-
     }
-
 }
