@@ -34,7 +34,8 @@ class CallPackageSeeders extends Command {
         Artisan::call('db:seed --class=\\OTIFSolutions\\CurrencyLayer\\Database\\Seeders\\TimezoneSeeder');
         Artisan::call('db:seed --class=\\OTIFSolutions\\CurrencyLayer\\Database\\Seeders\\CitySeeder');
 
-        $this->info('seeding successful');
+        $this->info('Seeding Successfully completed.');
+        $this->info('Thank you for your patience');
         $this->newLine();
 
         return 0;
