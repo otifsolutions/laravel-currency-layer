@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->float('latitude');     // like "36.68333000"
             $table->float('longitude');    // like "71.53333000"
             $table->string('wiki_data_id');   // like "Q4805192"
-            $table->foreignId('state_id')->unique()->references('id')->on('state');
+            $table->foreignId('state_id')->references('id')->on('state');
             $table->timestamps();
         });
     }
