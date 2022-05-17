@@ -2,8 +2,8 @@
 
 namespace OTIFSolutions\CurrencyLayer\Database\Seeders;
 
-use OTIFSolutions\CurrencyLayer\Models\Country;
 use Illuminate\Database\Seeder;
+use OTIFSolutions\CurrencyLayer\Models\Country;
 use OTIFSolutions\CurrencyLayer\Models\Timezone;
 
 class TimezoneSeeder extends Seeder {
@@ -15,7 +15,7 @@ class TimezoneSeeder extends Seeder {
     public function run() {
         ini_set('max_execution_time', 1000);
         $data = [];
-        if (($open = fopen(__DIR__ . './../csvs/countries.csv', 'r + b')) !== FALSE) {
+        if (($open = fopen(__DIR__ . '../csvs/countries.csv', 'r + b')) !== FALSE) {
             while (($timezone = fgetcsv($open, NULL, ',')) !== FALSE) {
                 $data[] = $timezone;
             }
@@ -52,22 +52,22 @@ class TimezoneSeeder extends Seeder {
 
             $countryObj = Country::where('name', $key)->first();
 
-            $ids = [];
             foreach ($subArray as $timezone) {
+                $ids = [];
                 if (is_string($timezone)) {     // if string, then  there is single timezone
                     $ids[] = $this->insertTimezone($timezone);
-                } else {    // if array, there are mulitple timeoznes
+                } else {    // if array, then there are muliple timezones
                     $timezones = $this->fixJsonString($timezone);
                     foreach ($timezones as $singleTimezone) {
                         $ids[] = $this->insertTimezone($singleTimezone);
                     }
                 }
             }
-            $countryObj->timezones()->sync($ids);
+            $countryObj->timezones()->sync(($ids ?? []));
         }
     }
 
-    private function insertTimezone(string $timezone) {
+    public function insertTimezone(string $timezone) {
         $timezone = json_decode($timezone);
         $timezoneObj = Timezone::updateOrCreate(['name' => $timezone->zoneName], [
             'name' => $timezone->zoneName,
@@ -76,10 +76,11 @@ class TimezoneSeeder extends Seeder {
             'abbreviation' => $timezone->abbreviation,
             'tz_name' => $timezone->tzName,
         ]);
+
         return $timezoneObj['id'];
     }
 
-    private function replaceChars($hayStack, array $charsArray, $character = ''): array {
+    public function replaceChars($hayStack, array $charsArray, $character = ''): array {
         $tempArray = [];
         foreach ($hayStack as $item) {
             $tempArray[] = str_replace($charsArray, $character, $item);
@@ -95,10 +96,10 @@ class TimezoneSeeder extends Seeder {
         );
     }
 
-    private function fixJsonString(array $stringsArray): array {
-        foreach ($stringsArray as $iValue) {
-            if (!str_contains($iValue, '}')) {
-                $stringsArray[] = $iValue . '}';
+    public function fixJsonString(array $stringsArray): array {
+        foreach ($stringsArray as $index => $string) {
+            if (!(substr($string, -1) === '}')) {
+                $stringsArray[$index] = $string . '}';
             }
         }
         return $stringsArray;
