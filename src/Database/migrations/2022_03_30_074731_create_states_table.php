@@ -15,7 +15,6 @@ return new class extends Migration {
             $table->engine = 'myIsam';
             $table->id();
             $table->string('name');             // state name like "badakhshan"
-            $table->string('country_code');     // country code like "AF" for afghanistan
             $table->string('state_code');       // state code like "BDS" for badakhshan
             $table->foreignId('country_id')->references('id')->on('countries');
             $table->float('latitude')->nullable();
