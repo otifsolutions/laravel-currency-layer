@@ -39,12 +39,13 @@ Grab the access key by registering on **[CurrencyLayer](https://currencylayer.co
 OTIFSolutions\Laravel\Settings\Models\Setting::set('crkey', 'yourAccessKey');
 ```
 
-Set the number of days where data of how many days you want to keep :
+Set the `numberOfDays`, where this is data of how many days you want to keep :
 
 ```
 OTIFSolutions\Laravel\Settings\Models\Setting::set('days_rates', numberOfDays);
 ```
 
+<br>
 __After setting everything and using API key with the package, you can synchronize currency data__
 
 > Hit this command to fetch the exchange rates data
@@ -58,6 +59,7 @@ php artisan rates:get
 ```
 php artisan rates:delete
 ```
+
 **Note :**
 
 > Command `rates:delete` will only be fired when you already have given the `days_rates` value/key
