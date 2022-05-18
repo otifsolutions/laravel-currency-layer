@@ -3,9 +3,8 @@
 namespace OTIFSolutions\CurrencyLayer\Commands;
 
 use Illuminate\Console\Command;
-
-use OTIFSolutions\CurrencyLayer\Models\{Currency, CurrencyRate};
 use OTIFSolutions\CurlHandler\Curl;
+use OTIFSolutions\CurrencyLayer\Models\{Currency, CurrencyRate};
 use OTIFSolutions\Laravel\Settings\Models\Setting;
 
 class FetchCurrencyRates extends Command {
@@ -22,6 +21,11 @@ class FetchCurrencyRates extends Command {
         }
 
         $ratesSaveDays = Setting::get('days_rates');   // data of how many days we want to store
+
+        if (!isset($ratesSaveDays)) {
+            $this->warn('ratesSaveDays is not set. Set it first then re-run the command');
+            return;
+        }
 
         if (!(is_numeric($ratesSaveDays) && is_numeric(abs($ratesSaveDays)))) {
             $this->warn('numDays should be a positive integer and not a character string');
@@ -50,7 +54,6 @@ class FetchCurrencyRates extends Command {
             $this->warn($response['error']['info']);
             return;
         }
-
 
         $bar = $this->output->createProgressBar(count($response['quotes']));
         $bar->start();
