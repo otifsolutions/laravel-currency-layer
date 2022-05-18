@@ -6,6 +6,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
 use OTIFSolutions\CurrencyLayer\Commands\FetchCurrencyRates;
 use OTIFSolutions\CurrencyLayer\Commands\RemoveHistoricalRates;
+use OTIFSolutions\CurrencyLayer\Commands\CallPackageSeeders;
 
 class CurrencyLayerServiceProvider extends ServiceProvider {
 
