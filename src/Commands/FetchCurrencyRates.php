@@ -16,10 +16,15 @@ class FetchCurrencyRates extends Command {
     public function handle() {
         $accessKey = Setting::get('crkey');
 
+        if (!isset($accessKey)) {
+            $this->warn('accessKey is not set. Set it first and re-run the command');
+            return;
+        }
+
         $ratesSaveDays = Setting::get('days_rates');   // data of how many days we want to store
 
         if (!(is_numeric($ratesSaveDays) && is_numeric(abs($ratesSaveDays)))) {
-            $this->warn('The key should be a positive integer and not a character string');
+            $this->warn('numDays should be a positive integer and not a character string');
             return;
         }
 
