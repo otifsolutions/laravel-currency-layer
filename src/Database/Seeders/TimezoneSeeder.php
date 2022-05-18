@@ -15,7 +15,7 @@ class TimezoneSeeder extends Seeder {
     public function run() {
         ini_set('max_execution_time', 1000);
         $data = [];
-        if (($open = fopen(__DIR__ . '../csvs/countries.csv', 'r + b')) !== FALSE) {
+        if (($open = fopen(__DIR__ . './../csvs/countries.csv', 'r + b')) !== FALSE) {
             while (($timezone = fgetcsv($open, NULL, ',')) !== FALSE) {
                 $data[] = $timezone;
             }
