@@ -37,8 +37,8 @@ class FetchCurrencyRates extends Command {
             $this->newLine("****************************");
             $this->newLine("*****  Seeders Running *****");
             $this->newLine("****************************");
-            \Artisan::call('db:seed --class=\\OTIFSolutions\\CurrencyLayer\\Database\\Seeders\\CurrencySeeder');
-            $this->newLine();
+            \Artisan::call('db:seed --class=\\\OTIFSolutions\\\CurrencyLayer\\\Database\\\Seeders\\\CountrySeeder');
+            \Artisan::call('db:seed --class=\\\OTIFSolutions\\\CurrencyLayer\\\Database\\\Seeders\\\CurrencySeeder');
             return;
         }
 
