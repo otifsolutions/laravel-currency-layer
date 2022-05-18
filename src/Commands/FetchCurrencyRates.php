@@ -75,7 +75,6 @@ class FetchCurrencyRates extends Command {
         }
 
         $bar->finish();
-        $bar->newLine();
 
         $this->info('Exchange rates synced successfully');
 
