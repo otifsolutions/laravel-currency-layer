@@ -34,9 +34,9 @@ class FetchCurrencyRates extends Command {
 
         if (Currency::all()->count() === 0) {
             $this->warn('Currency Table is blank | Seeders Started Running ...');
-            $this->newLine("****************************");
-            $this->newLine("*****  Seeders Running *****");
-            $this->newLine("****************************");
+            $this->info("****************************");
+            $this->info("*****  Seeders Running *****");
+            $this->info("****************************");
             \Artisan::call('db:seed --class=\\\OTIFSolutions\\\CurrencyLayer\\\Database\\\Seeders\\\CountrySeeder');
             \Artisan::call('db:seed --class=\\\OTIFSolutions\\\CurrencyLayer\\\Database\\\Seeders\\\CurrencySeeder');
             return;
@@ -75,6 +75,7 @@ class FetchCurrencyRates extends Command {
         }
 
         $bar->finish();
+        $this->newLine(2);
 
         $this->info('Exchange rates synced successfully');
 
