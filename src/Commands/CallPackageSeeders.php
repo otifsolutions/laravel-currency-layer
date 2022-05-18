@@ -28,11 +28,11 @@ class CallPackageSeeders extends Command {
     public function handle() {
 
         $this->info('Please wait for few seconds while seeding completes');
-        Artisan::call('db:seed --class=\\OTIFSolutions\\CurrencyLayer\\Database\\Seeders\\CountrySeeder');
-        Artisan::call('db:seed --class=\\OTIFSolutions\\CurrencyLayer\\Database\\Seeders\\StateSeeder');
-        Artisan::call('db:seed --class=\\OTIFSolutions\\CurrencyLayer\\Database\\Seeders\\CurrencySeeder');
-        Artisan::call('db:seed --class=\\OTIFSolutions\\CurrencyLayer\\Database\\Seeders\\TimezoneSeeder');
-        Artisan::call('db:seed --class=\\OTIFSolutions\\CurrencyLayer\\Database\\Seeders\\CitySeeder');
+        \Artisan::call('db:seed --class=\\\OTIFSolutions\\\CurrencyLayer\\\Database\\\Seeders\\\CountrySeeder');
+        \Artisan::call('db:seed --class=\\\OTIFSolutions\\\CurrencyLayer\\\Database\\\Seeders\\\StateSeeder');
+        \Artisan::call('db:seed --class=\\\OTIFSolutions\\\CurrencyLayer\\\Database\\\Seeders\\\CurrencySeeder');
+        \Artisan::call('db:seed --class=\\\OTIFSolutions\\\CurrencyLayer\\\Database\\\Seeders\\\TimezoneSeeder');
+        \Artisan::call('db:seed --class=\\\OTIFSolutions\\\CurrencyLayer\\\Database\\\Seeders\\\CitySeeder');
 
         $this->info('Seeding Successfully completed.');
         $this->info('Thank you for your patience');
