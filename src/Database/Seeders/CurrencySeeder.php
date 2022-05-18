@@ -16,8 +16,8 @@ class CurrencySeeder extends Seeder {
 
         $data = [];
         if (($open = fopen(__DIR__ . './../csvs/countries.csv', "r + b")) !== FALSE) {
-            while (($student = fgetcsv($open, NULL, ",")) !== FALSE) {
-                $data[] = $student;
+            while (($singleRecord = fgetcsv($open, NULL, ",")) !== FALSE) {
+                $data[] = $singleRecord;
             }
             fclose($open);
         }
