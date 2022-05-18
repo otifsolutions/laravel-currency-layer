@@ -1,6 +1,6 @@
 <?php
 
-namespace OTIFSolutions\CurrencyLayer;
+namespace OTIFSolutions\CurrencyLayer\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
