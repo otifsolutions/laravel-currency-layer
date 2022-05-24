@@ -3,9 +3,13 @@
 namespace OTIFSolutions\CurrencyLayer\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Carbon;
+
 use OTIFSolutions\CurrencyLayer\Models\Country;
+use OTIFSolutions\CurrencyLayer\Models\Timezone;
 use OTIFSolutions\CurrencyLayer\Models\Currency;
 use OTIFSolutions\CurrencyLayer\Models\State;
+use OTIFSolutions\CurrencyLayer\Models\City;
 
 class FillAllDatabaseTables extends Command {
 
@@ -21,7 +25,7 @@ class FillAllDatabaseTables extends Command {
 
         $countriesCsvArr = [];
         // reading from countries.csv
-        ($open = fopen(__DIR__ . '../Database/csvs/countries.csv', "r + b"));
+        ($open = fopen(__DIR__ . '../../Database/csvs/countries.csv', "r + b"));
         if ($open !== FALSE) {
             while (($singleRecord = fgetcsv($open, NULL, ",")) !== FALSE) {
                 $countriesCsvArr[] = $singleRecord;
@@ -97,7 +101,7 @@ class FillAllDatabaseTables extends Command {
         ini_set('max_execution_time', 500);
         $data = [];
 
-        $countriesCsvFile = fopen(__DIR__ . '../Database/csvs/countriesTimezones.csv', "r + b");
+        $countriesCsvFile = fopen(__DIR__ . '../../Database/csvs/countriesTimezones.csv', "r + b");
 
         if ($countriesCsvFile !== FALSE) {
             while (($timezone = fgetcsv($countriesCsvFile, NULL, ',')) !== FALSE) {
@@ -151,7 +155,7 @@ class FillAllDatabaseTables extends Command {
         // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         $statesArr = [];
-        if (($open = fopen(__DIR__ . '../Database/csvs/states.csv', "r + b")) !== FALSE) {
+        if (($open = fopen(__DIR__ . '../../Database/csvs/states.csv', "r + b")) !== FALSE) {
             while (($singleRecord = fgetcsv($open, NULL, ",")) !== FALSE) {
                 $statesArr[] = $singleRecord;
             }
@@ -189,7 +193,7 @@ class FillAllDatabaseTables extends Command {
 
         ini_set('memory_limit', '256M');
         $totalCities = 148249;
-        $filename = __DIR__ . '../Database/csvs/cities.csv';
+        $filename = __DIR__ . '../../Database/csvs/cities.csv';
 
         $citiesBar = $this->output->createProgressBar($totalCities);
         $this->line('  Populating Cities table');
