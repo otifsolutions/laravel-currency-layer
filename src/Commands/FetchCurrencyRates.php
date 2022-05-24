@@ -5,6 +5,7 @@ namespace OTIFSolutions\CurrencyLayer\Commands;
 use Illuminate\Console\Command;
 use OTIFSolutions\CurlHandler\Curl;
 use OTIFSolutions\CurrencyLayer\Models\Currency;
+use OTIFSolutions\CurrencyLayer\Models\CurrencyRate;
 use OTIFSolutions\Laravel\Settings\Models\Setting;
 
 class FetchCurrencyRates extends Command {
@@ -58,7 +59,7 @@ class FetchCurrencyRates extends Command {
 
             $currencyObj = Currency::firstWhere('currency', $convertedToCrrName);
             if ($currencyObj) {
-                Currency::create([
+                CurrencyRate::create([
                     'currency_id' => $currencyObj->id,
                     'source_crr' => $sourceCrrName,
                     'converted_crr' => $convertedToCrrName,
