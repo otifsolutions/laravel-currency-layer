@@ -11,8 +11,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "OTIFSolutions\\CurrencyLayer\\": "src/",
-      "OTIFSolutions\\CurrencyLayer\\Database\\Seeders\\": "Database/Seeders"
+      "OTIFSolutions\\CurrencyLayer\\": "src/"
     }
   },
   "extra": {
@@ -27,7 +26,6 @@
     "ext-json": "*",
     "ext-dom": "*",
     "otifsolutions/curl-handler": "^1",
-    "otifsolutions/laravel-settings": "^1",
-    "halaxa/json-machine": "^1"
+    "otifsolutions/laravel-settings": "^1"
   }
 }
