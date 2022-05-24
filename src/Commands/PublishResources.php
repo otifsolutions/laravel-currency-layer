@@ -3,6 +3,7 @@
 namespace OTIFSolutions\CurrencyLayer\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 
 class PublishResources extends Command {
 
