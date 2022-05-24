@@ -7,7 +7,7 @@ use OTIFSolutions\CurrencyLayer\Models\Country;
 use OTIFSolutions\CurrencyLayer\Models\Currency;
 use OTIFSolutions\CurrencyLayer\Models\State;
 
-class AllUpserts extends Command {
+class FillAllDatabaseTables extends Command {
 
     protected $signature = 'fill:tables';
     protected $description = 'Initiate filling datbase tables by reading from csvs';
@@ -21,7 +21,7 @@ class AllUpserts extends Command {
 
         $countriesCsvArr = [];
         // reading from countries.csv
-        ($open = fopen(storage_path('newCsvFiles/countries.csv'), "r + b"));
+        ($open = fopen(__DIR__ . '../Database/csvs/countries.csv', "r + b"));
         if ($open !== FALSE) {
             while (($singleRecord = fgetcsv($open, NULL, ",")) !== FALSE) {
                 $countriesCsvArr[] = $singleRecord;
@@ -65,18 +65,11 @@ class AllUpserts extends Command {
         $countryBar->finish();
         $this->newLine();
 
+        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // >>>>>>>>>>>>>>>>> populating countries ended here <<<<<<<<<<<<<<<<<<<<<<<<<<
+        // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        // reading againt the csv, in-efficient
-//        $currenciesArr = [];
-//        if (($open = fopen(storage_path('newCsvFiles/countries.csv'), "r + b")) !== FALSE) {
-//            while (($singleRecord = fgetcsv($open, NULL, ",")) !== FALSE) {
-//                $currenciesArr[] = $singleRecord;
-//            }
-//            fclose($open);
-//        }
 
-        // array_shift($currenciesArr);
         $countryBar = $this->output->createProgressBar($totalRecordsCountriesCsv);
         $this->line('  Populating Currencies table');
         $countryBar->start();
@@ -101,12 +94,10 @@ class AllUpserts extends Command {
         // >>>>>>>>>>>>>>>>>> populating currencies table ended here <<<<<<<<<<<<<<<<<<<<
         // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        ini_set('max_execution_time', 1000);
+        ini_set('max_execution_time', 500);
         $data = [];
 
-        $countriesCsvFile = fopen(database_path('csvs/countries.csv'), 'r + b');
-
-        // $countriesCsvFile = fopen(storage_path('newCsvFiles/countries.csv'), 'r+b');
+        $countriesCsvFile = fopen(__DIR__ . '../Database/csvs/countriesTimezones.csv', "r + b");
 
         if ($countriesCsvFile !== FALSE) {
             while (($timezone = fgetcsv($countriesCsvFile, NULL, ',')) !== FALSE) {
@@ -115,8 +106,8 @@ class AllUpserts extends Command {
             fclose($countriesCsvFile);
         }
 
-        $dataNumRecords = count($data);     // count countries sometimes 195, 252, 250, 276n
-        $resultingArray = [];   // this array is going to hold all the string timezones with countryNames as indexes
+        $dataNumRecords = count($data);
+        $resultingArray = [];   // going to hold all the string timezones with countryNames as indexes
 
         $countriesTimezonesProgressBar = $this->output->createProgressBar(428);
         $this->line('  Populating Timezones table');
@@ -160,14 +151,13 @@ class AllUpserts extends Command {
         // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
         $statesArr = [];
-        if (($open = fopen(storage_path('newCsvFiles/states.csv'), "r + b")) !== FALSE) {
+        if (($open = fopen(__DIR__ . '../Database/csvs/states.csv', "r + b")) !== FALSE) {
             while (($singleRecord = fgetcsv($open, NULL, ",")) !== FALSE) {
                 $statesArr[] = $singleRecord;
             }
             fclose($open);
         }
 
-//        dd($statesArr[0]);
 
         array_shift($statesArr);
 
@@ -175,10 +165,8 @@ class AllUpserts extends Command {
         $this->line('  Populating States table');
         $statesBar->start();
 
-
         $insertArray = [];
         foreach ($statesArr as $value) {
-//            dd($value);
             $insertArray[] = [
                 'id' => $value[0],
                 'name' => $value[1],
@@ -189,22 +177,19 @@ class AllUpserts extends Command {
             ];
 
             $statesBar->advance();
-//            dd($insertArray);
         }
 
         State::upsert($insertArray, ['id']);    // the id of state is unique, not the countryId
         $statesBar->finish();
         $this->newLine(1);
 
-
         // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
         // >>>>>>>>>>>>>>>>>>>>>>> populating states table ended here <<<<<<<<<<<<<<<<<<<<<<<<
         // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-
         ini_set('memory_limit', '256M');
         $totalCities = 148249;
-        $filename = storage_path('newCsvFiles/cities.csv');
+        $filename = __DIR__ . '../Database/csvs/cities.csv';
 
         $citiesBar = $this->output->createProgressBar($totalCities);
         $this->line('  Populating Cities table');
@@ -240,7 +225,6 @@ class AllUpserts extends Command {
 
         $citiesBar->finish();
         $this->newLine();
-
 
         $end = Carbon::now();
         $this->newLine();
