@@ -4,7 +4,7 @@ namespace OTIFSolutions\CurrencyLayer\Commands;
 
 use Illuminate\Console\Command;
 use OTIFSolutions\CurlHandler\Curl;
-use OTIFSolutions\CurrencyLayer\Models\{Currency, CurrencyRate};
+use OTIFSolutions\CurrencyLayer\Models\Currency;
 use OTIFSolutions\Laravel\Settings\Models\Setting;
 
 class FetchCurrencyRates extends Command {
@@ -13,32 +13,26 @@ class FetchCurrencyRates extends Command {
     protected $description = 'Hits the currency layer api, fetch the exchange rates';
 
     public function handle() {
-        $accessKey = Setting::get('crkey');
 
-        if (!isset($accessKey)) {
-            $this->warn('accessKey is not set. Set it first and re-run the command');
-            return;
-        }
+        $accessKey = Setting::get('crlkey');
+        $ratesSaveDays = Setting::get('daysRates');   // data of how many days we want to store
 
-        $ratesSaveDays = Setting::get('days_rates');   // data of how many days we want to store
-
-        if (!isset($ratesSaveDays)) {
-            $this->warn('ratesSaveDays is not set. Set it first then re-run the command');
+        if (!isset($accessKey, $ratesSaveDays)) {
+            $this->warn('Either accessy key \'crlkey\' or rates save days \'daysRates\' is not set. Check it how README.md');
             return;
         }
 
         if (!(is_numeric($ratesSaveDays) && is_numeric(abs($ratesSaveDays)))) {
-            $this->warn('numDays should be a positive integer and not a character string');
+            $this->warn('daysRates key should be a positive integer');
             return;
         }
 
         if (Currency::all()->count() === 0) {
-            $this->warn('Currency Table is blank | Seeders Started Running ...');
-            $this->info("****************************");
-            $this->info("*****  Seeders Running *****");
-            $this->info("****************************");
-            \Artisan::call('db:seed --class=\\\OTIFSolutions\\\CurrencyLayer\\\Database\\\Seeders\\\CountrySeeder');
-            \Artisan::call('db:seed --class=\\\OTIFSolutions\\\CurrencyLayer\\\Database\\\Seeders\\\CurrencySeeder');
+            $this->warn('Currency Table is blank | Can\'t run the command');
+            $this->line('Populating the tables...');
+            $this->newLine();
+            Artisan::call('fill:tables');
+            $this->line('Now re-run this command');
             return;
         }
 
@@ -58,25 +52,24 @@ class FetchCurrencyRates extends Command {
         $bar = $this->output->createProgressBar(count($response['quotes']));
         $bar->start();
 
-        foreach ($response['quotes'] as $i => $value) {
-            $baseCurrency = substr($i, 0, 3);
-            $childCurrency = substr($i, 3, 6);
+        foreach ($response['quotes'] as $i => $exchangeRate) {
+            $sourceCrrName = substr($i, 0, 3);
+            $convertedToCrrName = substr($i, 3, 6);
 
-            $baseObj = Currency::firstWhere('currency', $childCurrency);
-            if ($baseObj) {
-                CurrencyRate::create([
-                    'currency_id' => $baseObj->id,
-                    'baseCr' => $baseCurrency,
-                    'childCr' => $childCurrency,
-                    'exchange_rates' => $value
+            $currencyObj = Currency::firstWhere('currency', $convertedToCrrName);
+            if ($currencyObj) {
+                Currency::create([
+                    'currency_id' => $currencyObj->id,
+                    'source_crr' => $sourceCrrName,
+                    'converted_crr' => $convertedToCrrName,
+                    'exchange_rate' => $exchangeRate
                 ]);
+                $bar->advance();
             }
-            $bar->advance();
         }
 
         $bar->finish();
-        $this->newLine(2);
-
+        $this->newLine();
         $this->info('Exchange rates synced successfully');
 
     }
