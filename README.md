@@ -85,3 +85,14 @@ php artisan publish:flags
 **Note :**
 
 > Commands `rates:delete` and `rates:get` can only be executed when you set the keys `crlKey` and `daysRates`
+
+
+
+__Relationships defined between Models__
+
+Model <b>Country</b> has `OneToOne` relation and `Currency`, `ManyToMany` relation with `Timezone` and `OneToMany` relation with `State`.
+
+
+<b>State</b> Model has `OneToMany` relation with `City`
+
+
