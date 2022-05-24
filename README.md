@@ -96,3 +96,4 @@ Model <b>Country</b> has `OneToOne` relation and `Currency`, `ManyToMany` relati
 <b>State</b> Model has `OneToMany` relation with `City`
 
 
+<b>Currency<b> Model has `OneTOMany` relation with `CurrencyRate` 
