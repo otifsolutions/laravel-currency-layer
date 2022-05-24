@@ -8,12 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class City extends Model {
     use HasFactory;
 
-    protected $guarded = ['id'];
-
+    protected $guarded = [];
 
     public function state() {
         return $this->belongsTo(State::class);
     }
-
 
 }
