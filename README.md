@@ -20,7 +20,7 @@ composer require otifsolutions/currency-layer
 
 **Note :**
 
-> This package works with database engine 'myIsam', if you are using `mysql` you have to change your database engine to `myIsam` from config/database.php -> `'connection' => 'mysql'` and make change `'engine' => 'myIsam'`
+> This package works with database engine `myIsam`, if you are using `mysql` you have to change your database engine to `myIsam` from <b>config/database.php</b> -> `'connection' => 'mysql'` and make change `'engine' => 'myIsam'`
 
 __Now, run the migrations__
 
@@ -62,12 +62,14 @@ and
 OTIFSolutions\Laravel\Settings\Models\Setting::get('crlKey');
 ```
 
-__After setting all the things, you can synchronize currency data__
+If you have set the `crlKey` in the code, remove that line after first time execution.
 
-> Hit this command to fetch the exchange rates data
+__After setting all the things, you can now synchronize currency exchange rates data__
+
+> Hit this command to fetch the exchange rates
 
 ```
-php artisan rate:get
+php artisan rates:get
 ```
 
 > Hit this command to remove the exchange rates
