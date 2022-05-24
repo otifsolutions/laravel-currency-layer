@@ -10,55 +10,76 @@ __Requirements__
 
 __How to use the Library__
 
-
-Install via Composer
+Install via Composer **[Composer](https://getcomposer.org/download)** (Recommended)
 
 __Using Composer (Recommended)__
 
-
 ```
-composer require otifsolutions/currency-layer 
+composer require otifsolutions/currency-layer
 ```
 
-__And then run the migrations directly after installing package__
+**Note :**
+
+> This package works with database engine 'myIsam', if you are using `mysql` you have to change your database engine to `myIsam` from config/database.php -> `'connection' => 'mysql'` and make change `'engine' => 'myIsam'`
+
+__Now, run the migrations__
 
 ```
 php artisan migrate
 ```
 
-__Then, run this command to seed/populate all tables, let the seeds complete and please don't touch the code__
+__Then, run this command to populate all tables__
 
 ```
-php artisan run:seeders
+php artisan fill:tables
 ```
 
-Grab the access key by registering on **[CurrencyLayer](https://currencylayer.com)**, give the key to the app by tinker or writing this line anywhere in the code
+__Now follow the instructions__
+
+Grab the access key by registering on **[CurrencyLayer](https://currencylayer.com)**, give the key to the app by tinker or writing this line anywhere in the code, where `yourAccessKey` is the key you've got from API
 
 ```
-OTIFSolutions\Laravel\Settings\Models\Setting::set('crkey', 'yourAccessKey');
+OTIFSolutions\Laravel\Settings\Models\Setting::set('crlKey', 'yourAccessKey');
 ```
 
-Set the `numberOfDays`, where this is data of how many days you want to keep :
+Set the `numberOfDays` key, where this is the data of how many days you want to keep :
 
 ```
-OTIFSolutions\Laravel\Settings\Models\Setting::set('days_rates', numberOfDays);
+OTIFSolutions\Laravel\Settings\Models\Setting::set('daysRates', numberOfDays);
 ```
 
-__After setting everything and using API key with the package, you can synchronize currency data__
+**Note:**
 
+> To check what key you have set, try with `get` method like
+
+```
+OTIFSolutions\Laravel\Settings\Models\Setting::get('daysRates');
+```
+
+and
+
+```
+OTIFSolutions\Laravel\Settings\Models\Setting::get('crlKey');
+```
+
+__After setting all the things, you can synchronize currency data__
 
 > Hit this command to fetch the exchange rates data
 
 ```
-php artisan rates:get
+php artisan rate:get
 ```
 
-> Hit this command to remove the exchange rates data
-
+> Hit this command to remove the exchange rates
 ```
 php artisan rates:delete
 ```
 
+> Now publish countries flags from package to your project
+```
+php artisan publish:flags
+```
+
 **Note :**
 
-> Command `rates:delete` will only be fired when you already have given the `days_rates` value/key
+> Commands `rates:delete` and `rates:get` can only be executed when you set the keys `crlKey` and `daysRates`
