@@ -11,10 +11,11 @@ return new class extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('timezones', static function (Blueprint $table) {
+        Schema::create('timezones', function (Blueprint $table) {
             $table->engine = 'myIsam';
             $table->id();
-            $table->string('name');        // "Asia Kabul"
+            $table->string('name');             // "Asia Kabul"
+            $table->string('country');          // which country this timezone belongs to
             $table->string('gmt_offset');       // 16200
             $table->string('gmt_offset_name');  // "UTC+04:30"
             $table->string('abbreviation');     // "AFT"

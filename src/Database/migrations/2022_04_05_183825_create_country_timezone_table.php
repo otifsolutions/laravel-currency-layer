@@ -11,7 +11,7 @@ return new class extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('country_timezone',  function (Blueprint $table) {
+        Schema::create('country_timezone', function (Blueprint $table) {
             $table->engine = 'myIsam';
             $table->foreignId('country_id')->references('id')->on('countries');
             $table->foreignId('timezone_id')->references('id')->on('timezones');

@@ -11,13 +11,16 @@ return new class extends Migration {
      * @return void
      */
     public function up() {
-        Schema::create('currencies', static function (Blueprint $table) {
+        Schema::create('currencies', function (Blueprint $table) {
             $table->engine = 'myIsam';
             $table->id();
             $table->string('currency');         // "AFN"
             $table->string('name');    // "Afghan Afghani"
             $table->string('symbol');  // "؋"
-            $table->foreignId('country_id')->unique()->references('id')->on('countries');
+            $table->foreignId('country_id')
+                ->unique()
+                ->references('id')
+                ->on('countries');
             $table->timestamps();
         });
     }

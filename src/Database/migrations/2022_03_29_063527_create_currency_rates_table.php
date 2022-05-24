@@ -15,9 +15,9 @@ return new class extends Migration {
             $table->engine = 'myIsam';
             $table->id();
             $table->foreignId('currency_id')->references('id')->on('currencies');
-            $table->string('baseCr', 10);   // the source
-            $table->string('childCr', 10);  // the conversion
-            $table->double('exchange_rates');
+            $table->string('source_crr');   // the source currency name "USD"
+            $table->string('converted_crr');  // the converted currency name "PKR"
+            $table->double('exchange_rate');   // exchange rate "200"
             $table->timestamps();
         });
     }

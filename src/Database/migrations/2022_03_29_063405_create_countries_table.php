@@ -16,20 +16,21 @@ return new class extends Migration {
             $table->id();
             $table->string('name');             // "Afghanistan"
             $table->string('iso3');             // "AFG"
-            $table->string('iso2')->nullable(); // "AF"
+            $table->string('iso2');             // "AF"
             $table->string('numeric_code');     // "004"
             $table->string('phone_code');       // "93"
             $table->string('capital');          // "Kabul"
-            $table->string('tld');  // ".af"
+            $table->string('tld');              // ".af"
             $table->string('native');           // "افغانستان"
             $table->string('region');           // "Asia"
             $table->string('subregion');        // "Southern Asia"
-            $table->float('latitude');         // int or string
-            $table->float('longitude');        // int or float
+            $table->float('latitude');
+            $table->float('longitude');
             $table->string('flag')->nullable();
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
