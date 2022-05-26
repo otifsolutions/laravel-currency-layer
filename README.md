@@ -28,7 +28,7 @@ __Now, run the migrations__
 php artisan migrate
 ```
 
-__Then, run this command to populate all tables with with countries, states, currencies etc data__
+__Then, run this command to populate all tables with countries, states, currencies etc data__
 
 ```
 php artisan fill:tables
@@ -62,7 +62,9 @@ and
 OTIFSolutions\Laravel\Settings\Models\Setting::get('crlKey');
 ```
 
-If you have set the `crlKey` somewhere in the code, remove that line after first time execution. To reset or re-assign the key, you can use the same line.
+If you have set the `crlKey` somewhere in the code, remove that line
+after first time execution. To reset or re-assign the key, you can use the same line.
+But, it is recommended to use tinker to set the access key.
 
 
 __After setting all the things, you can now synchronize currency exchange rates data__
