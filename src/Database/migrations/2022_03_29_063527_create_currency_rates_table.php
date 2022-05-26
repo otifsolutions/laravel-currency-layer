@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('source_crr');   // the source currency name "USD"
             $table->string('converted_crr');  // the converted currency name "PKR"
             $table->double('exchange_rate');   // exchange rate "200"
+            $table->unsignedInteger('source_currency_id');
             $table->timestamps();
         });
     }
