@@ -50,6 +50,15 @@ class FetchCurrencyRates extends Command {
             return;
         }
 
+        // whenever the command is executed, it'll first put/update the latest exchange rates
+        // into currencies table at "latest_rate" colomn, then in currency_rates table
+        foreach ($response['quotes'] as $i => $value) {
+            Currency::where('currency', substr($i, 3, 6))
+                ->update([
+                    'latest_rate' => $value
+                ]);
+        }
+
         $bar = $this->output->createProgressBar(count($response['quotes']));
         $bar->start();
 
