@@ -21,6 +21,7 @@ return new class extends Migration {
                 ->unique()
                 ->references('id')
                 ->on('countries');
+            $table->unsignedDouble('latest_rate')->nullable();
             $table->timestamps();
         });
     }
