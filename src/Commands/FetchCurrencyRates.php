@@ -53,8 +53,11 @@ class FetchCurrencyRates extends Command {
         $bar = $this->output->createProgressBar(count($response['quotes']));
         $bar->start();
 
+
+        $sourceCrrName = $response['source'];
+        $sourceObj = Currency::firstWhere('currency', $sourceCrrName);
+
         foreach ($response['quotes'] as $i => $exchangeRate) {
-            $sourceCrrName = substr($i, 0, 3);
             $convertedToCrrName = substr($i, 3, 6);
 
             $currencyObj = Currency::firstWhere('currency', $convertedToCrrName);
@@ -63,8 +66,10 @@ class FetchCurrencyRates extends Command {
                     'currency_id' => $currencyObj->id,
                     'source_crr' => $sourceCrrName,
                     'converted_crr' => $convertedToCrrName,
-                    'exchange_rate' => $exchangeRate
+                    'exchange_rate' => $exchangeRate,
+                    'source_currency_id' => $sourceObj->id
                 ]);
+
                 $bar->advance();
             }
         }
