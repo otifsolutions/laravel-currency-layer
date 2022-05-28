@@ -191,7 +191,7 @@ class FillAllDatabaseTables extends Command {
         // >>>>>>>>>>>>>>>>>>>>>>> populating states table ended here <<<<<<<<<<<<<<<<<<<<<<<<
         // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-        ini_set('memory_limit', '256M');
+        ini_set('memory_limit', '-1');
         $totalCities = 148249;
         $filename = __DIR__ . '../../Database/csvs/cities.csv';
 
