@@ -38,13 +38,13 @@ __Now follow the instructions below__
 
 Grab the access key by registering on **[CurrencyLayer](https://currencylayer.com)**, give the key to the app using `artisan tinker` or by writing this line anywhere in the code, where `yourAccessKey` (string) is the key you've got from the API
 
-```
+```php
 OTIFSolutions\Laravel\Settings\Models\Setting::set('crlKey', 'yourAccessKey');
 ```
 
 Set the `numberOfDays` key (positive integer), where this is the data of how many days you want to keep:
 
-```
+```php
 OTIFSolutions\Laravel\Settings\Models\Setting::set('daysRates', numberOfDays);
 ```
 
@@ -52,13 +52,13 @@ OTIFSolutions\Laravel\Settings\Models\Setting::set('daysRates', numberOfDays);
 
 > To check what key you have set, try with `get` method like
 
-```
+```php
 OTIFSolutions\Laravel\Settings\Models\Setting::get('daysRates');
 ```
 
 and
 
-```
+```php
 OTIFSolutions\Laravel\Settings\Models\Setting::get('crlKey');
 ```
 
