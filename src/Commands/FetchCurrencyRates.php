@@ -3,6 +3,7 @@
 namespace OTIFSolutions\CurrencyLayer\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 use OTIFSolutions\CurlHandler\Curl;
 use OTIFSolutions\CurrencyLayer\Models\Currency;
 use OTIFSolutions\CurrencyLayer\Models\CurrencyRate;
